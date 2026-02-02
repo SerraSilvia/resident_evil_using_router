@@ -1,0 +1,12 @@
+# User-agent: * significa que aquestes regles s'apliquen a TOTS els cercadors
+User-agent: *
+
+# Permet l'accés a tota la web
+Allow: /
+
+# Bloqueja l'accés a les rutes fictícies especificades
+Disallow: /admin
+Disallow: /privat
+
+# Opcional: Indica on és el teu sitemap per facilitar la indexació
+Sitemap: https://la-teva-web.com/sitemap.xml

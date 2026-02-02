@@ -5,22 +5,34 @@ class Book extends React.Component {
     const { image, title, synopsis } = this.props;
 
     return (
-      <div className="bg-gray-800/50 shadow-lg p-4 rounded-lg h-full flex flex-col">
+      <article className="bg-gray-800/80 shadow-lg p-4 rounded-lg h-full flex flex-col border border-gray-700">
         {/* Imagen + título */}
         <div className="flex items-center mb-4">
           <img
-            alt={title}
-            className="w-[80px] h-[120px] object-cover rounded-lg"
+            alt={`Portada del libro ${title}`}
+            className="w-[80px] h-[120px] object-cover rounded-lg flex-shrink-0 shadow-md"
             src={image}
           />
-          <h3 className="ml-4">{title}</h3>
+          <div className="ml-4 flex-1 min-w-0">
+            <h3 
+              className="text-[#ff8c00] leading-none uppercase tracking-tight text-sm sm:text-base"
+              style={{ 
+                fontFamily: "'Roboto', sans-serif", 
+                fontWeight: '800', 
+                textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
+                wordBreak: "break-word"
+              }}
+            >
+              {title}
+            </h3>
+          </div>
         </div>
 
-        {/* Sinopsis */}
-        <p className="text-gray-300 text-sm text-justify break-words">
+        {/* Sinopsis - Millorem contrast i llegibilitat */}
+        <p className="text-gray-100 text-sm text-left break-words leading-relaxed">
           {synopsis}
         </p>
-      </div>
+      </article>
     );
   }
 }
