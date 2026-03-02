@@ -1,0 +1,50 @@
+@import './variables'; // Importamos las variables
+
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  background-color: $color-bg-dark;
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+
+  // MOBILE FIRST: Diseño base para móviles
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  gap: 1rem;
+
+  // Pantallas grandes (Tablet/Desktop)
+  @media (min-width: $tablet) {
+    flex-direction: row;
+    justify-content: flex-end; 
+    gap: 2rem;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+
+    a {
+      color: $color-white;
+      text-decoration: none;
+      transition: color 0.3s;
+      font-weight: 700;
+
+      &:hover, &.active {
+        color: $color-primary; // Usamos la variable
+      }
+    }
+  }
+
+  .audio-btn {
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+  }
+}

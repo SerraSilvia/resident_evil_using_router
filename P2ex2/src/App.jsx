@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import portada from "./assets/portada.png";
 
-// Importación de componentes existentes
+// 1. IMPORTANTE:archivo global de Sass 
+import "./global.scss"; 
+
+// Importación de componentes
 import Header from "./components/Header.jsx";
 import Background from "./components/Background.jsx";
 import Snowstorm from "./components/Snowstorm.jsx";
@@ -21,28 +24,29 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className="relative min-h-screen text-white">
+        {/* Usamos una clase base de layout */}
+        <div className="app-container"> 
           <Background />
           <Snowstorm />
           
-          {/* El Header con tus NavLinks */}
           <Header />
 
-          <main className="pt-20"> {/* Espacio para el header fixed */}
+          {/* Cambiamos pt-20 por una clase que podemos controlar en Sass */}
+          <main className="main-content"> 
             <Routes>
               
               {/* RUTA HOME */}
               <Route path="/" element={
-                <section className="flex flex-col justify-end items-center h-[80vh] relative z-20 px-4">
-                  <img src={portada} alt="Portada" className="max-w-lg rounded-lg shadow-lg animate-fade-in" />
+                <section className="home-hero">
+                  <img src={portada} alt="Portada Resident Evil" className="hero-img" />
                 </section>
               } />
 
               {/* RUTA VIDEOJUEGOS */}
               <Route path="/videojuegos" element={
-                <section className="relative z-20 overflow-x-auto py-6 px-4 md:px-12">
-                  <h1 className="mb-6 text-center text-6xl">VIDEOJUEGOS</h1>
-                  <div className="relative flex space-x-4 pb-16">
+                <section className="section"> {/* Clase .section de tu Sass */}
+                  <h1>VIDEOJUEGOS</h1>
+                  <div className="horizontal-scroll">
                     {gamesData.games.map((game, index) => (
                       <VideoGame key={index} {...game} />
                     ))}
@@ -52,9 +56,9 @@ class App extends Component {
 
               {/* RUTA LECTURA */}
               <Route path="/lectura" element={
-                <section className="p-6 relative z-20">
-                  <h1 className="mb-6 text-center text-6xl">LIBROS</h1>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <section className="section">
+                  <h1>LIBROS</h1>
+                  <div className="grid-container">
                     {booksData.books.map((book, index) => (
                       <Book key={index} {...book} />
                     ))}
@@ -64,9 +68,9 @@ class App extends Component {
 
               {/* RUTA FILMOGRAFIA */}
               <Route path="/filmografia" element={
-                <section className="relative z-20 overflow-x-auto py-6 px-4 md:px-12">
-                  <h1 className="mb-6 text-center text-6xl">PELÍCULAS</h1>
-                  <div className="relative flex space-x-4 pb-16">
+                <section className="section">
+                  <h1>PELÍCULAS</h1>
+                  <div className="horizontal-scroll">
                     {moviesData.movies.map((movie, index) => (
                       <Movie key={index} {...movie} />
                     ))}
@@ -76,14 +80,13 @@ class App extends Component {
 
               {/* RUTA PRÓXIMAMENTE */}
               <Route path="/proxim" element={
-                <section className="relative z-30 py-6 px-4 md:px-12">
-                  <h1 className="mb-6 text-center text-6xl">PRÓXIMAMENTE</h1>
+                <section className="section">
+                  <h1>PRÓXIMAMENTE</h1>
                   <Incoming />
                 </section>
               } />
 
-              {/* REDIRECCIÓN SI LA RUTA NO EXISTE */}
-              <Route path="*" element={ <h1 className="text-center py-20">404 - Página no encontrada</h1> } />
+              <Route path="*" element={ <h1 className="error-404">404 - Página no encontrada</h1> } />
 
             </Routes>
           </main>
